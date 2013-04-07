@@ -4,11 +4,21 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
+      <itemPath>ldde_privado.h</itemPath>
+      <itemPath>ldde_publico.h</itemPath>
+      <itemPath>main.h</itemPath>
+      <itemPath>me_privado.h</itemPath>
+      <itemPath>me_publico.h</itemPath>
+      <itemPath>quicksort_privado.h</itemPath>
+      <itemPath>quicksort_publico.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
                    projectFiles="true">
-      <itemPath>main.cpp</itemPath>
+      <itemPath>ldde.c</itemPath>
+      <itemPath>main.c</itemPath>
+      <itemPath>me.c</itemPath>
+      <itemPath>quicksort.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Arquivos de Recurso"
@@ -37,7 +47,27 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="ldde.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ldde_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ldde_publico.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="me.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="me_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="me_publico.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="quicksort.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="quicksort_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="quicksort_publico.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -61,7 +91,27 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="ldde.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ldde_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ldde_publico.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="me.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="me_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="me_publico.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="quicksort.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="quicksort_privado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="quicksort_publico.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
