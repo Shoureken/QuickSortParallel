@@ -346,9 +346,10 @@ int tamanho(pLista p){
     return p->size;
 }
 
-int toString(pLista p){
-    Nolista aux = p->inicio;
+void toString(pLista p){
+    Nolista *aux;
     int dest = 0;
+    aux = p->inicio;
     printf("Lista ---->   ");
     while(aux!=NULL){
         memcpy(&dest,aux->dado,p->tInfo);

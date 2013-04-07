@@ -7,6 +7,7 @@
 #define FALSE 0
 
 typedef struct Lista *pLista, **ppLista;
+typedef struct Nolista *pNoLista, **ppNoLista;
 
 int criarLista(ppLista pp, int tInfo);
 int destruirLista(ppLista pp);
@@ -25,4 +26,4 @@ int buscaPos(pLista p, void *elemento, int pos);
 int buscaFim(pLista p, void *elemento);
 
 int tamanho(pLista p);
-int toString(pLista p);
+void toString(pLista p);
