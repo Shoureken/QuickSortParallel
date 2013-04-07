@@ -24,3 +24,5 @@ int buscaInicio(pLista p, void *elemento);
 int buscaPos(pLista p, void *elemento, int pos);
 int buscaFim(pLista p, void *elemento);
 
+int tamanho(pLista p);
+int toString(pLista p);

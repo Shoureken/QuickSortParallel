@@ -5,9 +5,10 @@
 /* CRIAR; DESTRUIR; REINICIAR */
 
 int criarLista(ppLista pp, int tInfo) {
-    (*pp) = (Lista *)malloc(sizeof(Lista));
-    if((*pp) == NULL)
+    (*pp) = (Lista *) malloc(sizeof (Lista));
+    if ((*pp) == NULL) {
         return FALSE;
+    }        
     (*pp)->tInfo = tInfo;
     (*pp)->inicio = NULL;
     (*pp)->fim = NULL;
@@ -16,8 +17,9 @@ int criarLista(ppLista pp, int tInfo) {
 }
 
 int destruirLista(ppLista pp) {
-    if((*pp) == NULL)
+    if ((*pp) == NULL) {
         return FALSE;
+    }
     reiniciarLista(pp);
     free((*pp));
     (*pp) = NULL;
@@ -28,7 +30,7 @@ int destruirLista(ppLista pp) {
 int reiniciarLista(ppLista pp) {
     Nolista *aux, *aux2;
     aux = (*pp)->inicio;
-    while(aux != NULL) {
+    while (aux != NULL) {
         aux2 = aux;
         free(aux);
         aux = aux2->proximo;
@@ -42,10 +44,9 @@ int reiniciarLista(ppLista pp) {
 /* VAZIA - CHEIA */
 
 int vazia(pLista p) {
-    if(p->inicio == NULL && p->fim == NULL) {
+    if (p->inicio == NULL && p->fim == NULL) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
@@ -54,30 +55,30 @@ int vazia(pLista p) {
 
 int addInicio(pLista p, void *elemento) {
     Nolista *novo;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    novo = (Nolista *)malloc(sizeof(Nolista));
-    if(novo == NULL) {
+    novo = (Nolista *) malloc(sizeof (Nolista));
+    if (novo == NULL) {
         printf("[Novo] - Erro na alocação de um novo nó!\n");
         return FALSE;
     }
     novo->dado = malloc(p->tInfo);
-    if(novo->dado == NULL) {
+    if (novo->dado == NULL) {
         printf("[Novo->dado] - Erro na alocação em novo->dado!\n");
         return FALSE;
     }
     memcpy(novo->dado, elemento, p->tInfo);
     novo->anterior = NULL;
     novo->proximo = p->inicio;
-    if(vazia(p)) {
+    if (vazia(p)) {
         p->fim = novo;
-    }
-    else {
+    } else {
         p->inicio->anterior = novo;
     }
     p->inicio = novo;
+    p->size++;
     printf("[INSERIR] - Início - Ok!\n");
     return TRUE;
 }
@@ -85,43 +86,43 @@ int addInicio(pLista p, void *elemento) {
 int addPos(pLista p, void *elemento, int pos) {
     Nolista *novo, *aux;
     int count = 1, n = 0;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(pos == 1) {
-        if(addInicio(p, elemento) == TRUE)
+    if (pos == 1) {
+        if (addInicio(p, elemento) == TRUE)
             return TRUE;
         else
             return FALSE;
     }
     aux = p->inicio;
-    while(aux != NULL) {
+    while (aux != NULL) {
         aux = aux->proximo;
         n++;
     }
-    if(pos > (n+1)) {
+    if (pos > (n + 1)) {
         printf("[INSERIR] - Posição - Essa posição é inválida!\n");
         return FALSE;
-    } else if(pos == (n+1)) {
-        if(addFim(p, elemento))
+    } else if (pos == (n + 1)) {
+        if (addFim(p, elemento))
             return TRUE;
         else
             return FALSE;
     }
-    novo = (Nolista *)malloc(sizeof(Nolista));
-    if(novo == NULL) {
+    novo = (Nolista *) malloc(sizeof (Nolista));
+    if (novo == NULL) {
         printf("[Novo] - Erro na alocação de um novo nó!\n");
         return FALSE;
     }
     novo->dado = malloc(p->tInfo);
-    if(novo->dado == NULL) {
+    if (novo->dado == NULL) {
         printf("[Novo->dado] - Erro na alocação em novo->dado!\n");
         return FALSE;
     }
     memcpy(novo->dado, elemento, p->tInfo);
     aux = p->inicio;
-    while(count < pos) {
+    while (count < pos) {
         aux = aux->proximo;
         count++;
     }
@@ -129,30 +130,31 @@ int addPos(pLista p, void *elemento, int pos) {
     novo->anterior = aux->anterior;
     aux->anterior = novo;
     novo->proximo = aux;
+    p->size++;
     printf("[INSERIR] - Posição - Ok!\n");
     return TRUE;
 }
 
 int addFim(pLista p, void *elemento) {
     Nolista *novo;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
-        if(addInicio(p, elemento))
+    if (vazia(p)) {
+        if (addInicio(p, elemento))
             return TRUE;
         else
             return FALSE;
     }
-    
-    novo = (Nolista *)malloc(sizeof(Nolista));
-    if(novo == NULL) {
+
+    novo = (Nolista *) malloc(sizeof (Nolista));
+    if (novo == NULL) {
         printf("[Novo] - Erro na alocação de um novo nó!\n");
         return FALSE;
     }
     novo->dado = malloc(p->tInfo);
-    if(novo->dado == NULL) {
+    if (novo->dado == NULL) {
         printf("[Novo->dado] - Erro na alocação em novo->dado!\n");
         return FALSE;
     }
@@ -161,6 +163,7 @@ int addFim(pLista p, void *elemento) {
     p->fim->proximo = novo;
     novo->anterior = p->fim;
     p->fim = novo;
+    p->size++;
     printf("[INSERIR] - Fim - Ok!\n");
     return TRUE;
 }
@@ -169,27 +172,27 @@ int addFim(pLista p, void *elemento) {
 
 int remInicio(pLista p, void *elemento) {
     Nolista *aux;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
-    
+
     aux = p->inicio;
     p->inicio = aux->proximo;
-    if(p->inicio == NULL) {
+    if (p->inicio == NULL) {
         p->fim = NULL;
-    }
-    else {
+    } else {
         p->inicio->anterior = NULL;
     }
     aux->proximo = NULL;
     memcpy(elemento, aux->dado, p->tInfo);
     free(aux->dado);
     free(aux);
+    p->size--;
     printf("[REMOVER] - Início - Ok!\n");
     return TRUE;
 }
@@ -197,43 +200,43 @@ int remInicio(pLista p, void *elemento) {
 int remPos(pLista p, void *elemento, int pos) {
     int count = 1, n = 0;
     Nolista *aux;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
-    if(pos < 1 || (pos > 1 && p->inicio->proximo == NULL)) {
+    if (pos < 1 || (pos > 1 && p->inicio->proximo == NULL)) {
         printf("[REMOVER] - Posição - Posição inválida!\n");
         return FALSE;
-    } else if(pos == 1) {
-        if(remInicio(p, elemento))
+    } else if (pos == 1) {
+        if (remInicio(p, elemento))
             return TRUE;
         else
             return FALSE;
     }
-    
-    
+
+
     aux = p->inicio;
-    while(aux != NULL) {
+    while (aux != NULL) {
         aux = aux->proximo;
         n++;
     }
-    if(pos > n) {
+    if (pos > n) {
         printf("[REMOVER] - Posição - Posição inválida!\n");
         aux = NULL;
         free(aux);
         return FALSE;
-    } else if(pos == n) {
-        if(remFim(p, elemento))
+    } else if (pos == n) {
+        if (remFim(p, elemento))
             return TRUE;
         else
             return FALSE;
     }
     aux = p->inicio;
-    while(count < pos) {
+    while (count < pos) {
         aux = aux->proximo;
         count++;
     }
@@ -242,27 +245,27 @@ int remPos(pLista p, void *elemento, int pos) {
     memcpy(elemento, aux->dado, p->tInfo);
     free(aux->dado);
     free(aux);
+    p->size--;
     printf("[REMOVER] - Posição - Ok!\n");
     return TRUE;
 }
 
 int remFim(pLista p, void *elemento) {
     Nolista *aux;
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
-    
+
     aux = p->fim;
-    if(aux->anterior == NULL) {
+    if (aux->anterior == NULL) {
         p->inicio = NULL;
         p->fim = NULL;
-    }
-    else {
+    } else {
         p->fim = aux->anterior;
         p->fim->proximo = NULL;
         aux->anterior = NULL;
@@ -270,6 +273,7 @@ int remFim(pLista p, void *elemento) {
     memcpy(elemento, aux->dado, p->tInfo);
     free(aux->dado);
     free(aux);
+    p->size--;
     printf("[REMOVER] - Fim - Ok!\n");
     return TRUE;
 }
@@ -277,11 +281,11 @@ int remFim(pLista p, void *elemento) {
 /* BUSCAS */
 
 int buscaInicio(pLista p, void *elemento) {
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
@@ -293,22 +297,22 @@ int buscaInicio(pLista p, void *elemento) {
 int buscaPos(pLista p, void *elemento, int pos) {
     Nolista *aux;
     int count = 1;
-    if(pos < 1) {
+    if (pos < 1) {
         printf("[BUSCAR] - Posição - Posição inválida!\n");
         return FALSE;
     }
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
-    
+
     aux = p->inicio;
-    while(count < pos) {
-        if(aux->proximo == NULL) {
+    while (count < pos) {
+        if (aux->proximo == NULL) {
             printf("[BUSCAR] - Posição - Posição inválida!\n");
             return FALSE;
         }
@@ -321,15 +325,35 @@ int buscaPos(pLista p, void *elemento, int pos) {
 }
 
 int buscaFim(pLista p, void *elemento) {
-    if(p == NULL) {
+    if (p == NULL) {
         printf("[Lista] - Lista é NULL!\n");
         return FALSE;
     }
-    if(vazia(p)) {
+    if (vazia(p)) {
         printf("[Lista] - Lista está vazia!\n");
         return FALSE;
     }
     memcpy(elemento, p->fim->dado, p->tInfo);
     printf("[BUSCAR] - Fim - Ok!\n");
     return TRUE;
+}
+
+int tamanho(pLista p){
+    if (p == NULL) {
+        printf("[Lista] - Lista é NULL!\n");
+        return FALSE;
+    }
+    return p->size;
+}
+
+int toString(pLista p){
+    Nolista aux = p->inicio;
+    int dest = 0;
+    printf("Lista ---->   ");
+    while(aux!=NULL){
+        memcpy(&dest,aux->dado,p->tInfo);
+        printf("%i,",dest);
+        aux = aux->proximo;
+    }
+    printf("\n");
 }

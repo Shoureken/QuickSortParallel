@@ -13,5 +13,6 @@ typedef struct Lista {
     struct Nolista *inicio;
     struct Nolista *fim;
     int tInfo;
+    int size;
 } Lista;
 
