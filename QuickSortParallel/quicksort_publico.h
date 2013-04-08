@@ -16,4 +16,4 @@
 
 typedef struct param_t *pParam_t, **ppParam_t;
 
-void ordenar(pLista p, int threads, int (*cmp)(void *d1, void *d2));
+void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, void *d2));

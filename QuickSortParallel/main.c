@@ -31,7 +31,7 @@ int cmpInt(void *d1, void *d2){
 }
 
 int main(int argc, char** argv) {
-    pLista lista = NULL;
+    pLista lista = NULL, ordenada = NULL;
     int size;
 
     if ((argc != 2)) {
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     size = atoi(argv[1]); // tamanho do array
     criarListaRandom(&lista, size);
     toString(lista);
-    ordenar(lista, 2, cmpInt);
+    ordenar(lista, &ordenada, 2, cmpInt);
     
     return 0;
 }

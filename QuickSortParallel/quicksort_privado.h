@@ -21,5 +21,5 @@ typedef struct {
     pLista menores;
     int (*cmp)(void *d1, void *d2);
     int inicio;
-    int fim;
+    int deslocamento;
 } param_t;

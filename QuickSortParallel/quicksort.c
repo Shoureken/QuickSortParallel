@@ -4,46 +4,40 @@
 void *separar(void *arg) {
     int i, comparacao;
     pNoLista atual = NULL;
-    param_t *threadParameter = (param_t *) arg;
-    printf("separar \n");
-
-
-
-    criarLista(&threadParameter->maiores, threadParameter->dataSize);
-    criarLista(&threadParameter->menores, threadParameter->dataSize);
-    for (i = threadParameter->inicio; i <= threadParameter->fim; i++) {
+    param_t *tParam = (param_t *) arg;
+    int pivoData = *((int *) tParam->pivo->dado);
+    printf("Thread -> Separar id= %d, pivo= %d, inicio= %d, deslocamento= %d, \n", tParam->threadId, pivoData, tParam->inicio, tParam->deslocamento);
+    criarLista(&tParam->maiores, tParam->dataSize);
+    criarLista(&tParam->menores, tParam->dataSize);
+    for (i = 0; i < tParam->deslocamento; i++) {
         if (atual == NULL) {
-            buscaPos(threadParameter->lista, atual, i);
+            buscaPos(tParam->lista, &atual, i);
         }
-        comparacao = threadParameter->cmp(atual, threadParameter->pivo);
+        comparacao = tParam->cmp(atual, tParam->pivo);
         if (comparacao >= 0) {
-            addFim(threadParameter->maiores, atual);
+            addFim(tParam->maiores, atual);
         } else {
-            addFim(threadParameter->menores, atual);
+            addFim(tParam->menores, atual);
         }
     }
     return 0;
 }
 
-void ordenar(pLista p, int qtThreads, int (*cmp)(void *d1, void *d2)) {
+void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, void *d2)) {
     int qtDiv = (p->size - 1) / qtThreads;
     int qtIni = qtDiv + ((p->size - 1) % qtThreads);
     int i;
-
+    
     pthread_t *threads;
     param_t *args;
+    
+    pLista *maiores;
+    pLista *menores;
 
     threads = (pthread_t *) malloc(qtThreads * sizeof (pthread_t));
     args = (param_t *) malloc(qtThreads * sizeof (param_t));
-    pLista maiores1;
-    pLista maiores2;
-    pLista menores1;
-    pLista menores2;
-
-
-
-
-
+    maiores = (pLista *) malloc(qtThreads * sizeof(pLista));
+    menores = (pLista *) malloc(qtThreads * sizeof(pLista));
 
     printf("ordenar qtDiv = %d %d\n", qtDiv, qtIni);
     for (i = 0; i < qtThreads; i++) {
@@ -52,15 +46,14 @@ void ordenar(pLista p, int qtThreads, int (*cmp)(void *d1, void *d2)) {
         args[i].dataSize = p->tInfo;
         args[i].pivo = p->inicio;
         args[i].lista = p;
-
+        args[i].maiores = maiores[i];
+        args[i].menores = menores[i];
         if (i == 0) {
-            args[i].fim = qtIni;
-            args[i].maiores = maiores1;
-            args[i].menores = menores1;
+            args[i].inicio = 1;
+            args[i].deslocamento = qtIni;    
         } else {
-            args[i].fim = qtDiv;
-            args[i].maiores = maiores2;
-            args[i].menores = menores2;
+            args[i].inicio = 1+qtIni+((i-1)*qtDiv);
+            args[i].deslocamento = qtDiv;
         }
         pthread_create(&threads[i], NULL, separar, (void *) (args + i));
     }
