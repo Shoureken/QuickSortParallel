@@ -1,6 +1,7 @@
 /* lista.c */
 
 #include "ldde_privado.h"
+#include "quicksort_publico.h"
 
 /* CRIAR; DESTRUIR; REINICIAR */
 
@@ -357,4 +358,18 @@ void toString(pLista p){
         aux = aux->proximo;
     }
     printf("\n");
+}
+
+int acrescentarFim(pLista original, pLista acrescentar){
+    original->fim->proximo = acrescentar->inicio;
+    acrescentar->inicio->anterior = original->fim;
+    original->fim = acrescentar->fim;
+    return TRUE;
+}
+
+int acrescentarInicio(pLista original, pLista acrescentar){
+    original->inicio->anterior = acrescentar->fim;
+    acrescentar->fim->proximo = original->inicio;
+    original->inicio = acrescentar->inicio;
+    return TRUE;
 }
