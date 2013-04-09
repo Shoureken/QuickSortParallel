@@ -321,7 +321,7 @@ int buscaPos(pLista p, void *elemento, int pos) {
         count++;
     }
     memcpy(elemento, aux->dado, p->tInfo);
-    printf("[BUSCAR] - Posição - Ok!\n");
+    printf("[BUSCAR] - Posição %d - Ok!\n", pos);
     return TRUE;
 }
 
@@ -364,6 +364,7 @@ int acrescentarFim(pLista original, pLista acrescentar){
     original->fim->proximo = acrescentar->inicio;
     acrescentar->inicio->anterior = original->fim;
     original->fim = acrescentar->fim;
+    original->size += acrescentar->size;
     return TRUE;
 }
 
@@ -371,5 +372,6 @@ int acrescentarInicio(pLista original, pLista acrescentar){
     original->inicio->anterior = acrescentar->fim;
     acrescentar->fim->proximo = original->inicio;
     original->inicio = acrescentar->inicio;
+    original->size += acrescentar->size;
     return TRUE;
 }
