@@ -29,3 +29,4 @@ int tamanho(pLista p);
 void toString(pLista p);
 int acrescentarFim(pLista original, pLista acrescentar);
 int acrescentarInicio(pLista original, pLista acrescentar);
+int buscaNoPos(pLista p, ppNoLista pp, int pos);

@@ -17,8 +17,8 @@ typedef struct {
     int dataSize;
     pLista lista;
     Nolista *pivo;
-    pLista maiores;
-    pLista menores;
+    ppLista maiores;
+    ppLista menores;
     int (*cmp)(void *d1, void *d2);
     int inicio;
     int deslocamento;

@@ -6,26 +6,31 @@ void *separar(void *arg) {
     Nolista *atual;
     param_t *tParam = (param_t *) arg;
     int pivoData = *((int *) tParam->pivo->dado);
-    atual = (Nolista *) malloc(sizeof (Nolista));
-    atual->dado = malloc(tParam->dataSize);
-    
     printf("Thread -> Separar id= %d, pivo= %d, inicio= %d, deslocamento= %d, \n", tParam->threadId, pivoData, tParam->inicio, tParam->deslocamento);
-    criarLista(&tParam->maiores, tParam->dataSize);
-    criarLista(&tParam->menores, tParam->dataSize);
-    buscaPos(tParam->lista, atual->dado, tParam->inicio);
+    criarLista(tParam->maiores, tParam->dataSize);
+    criarLista(tParam->menores, tParam->dataSize);
+    buscaNoPos(tParam->lista, &atual, tParam->inicio);
     printf("%d - Buscando : %d\n", tParam->threadId, *((int *) atual->dado));
-    
     for (i = 0; i < tParam->deslocamento; i++) {
         printf("%d - Comparando : %d - %d\n", tParam->threadId, *((int *) atual->dado), *((int *) tParam->pivo->dado));
+
         comparacao = tParam->cmp(atual->dado, tParam->pivo->dado);
-        printf("%d - Resultado : %d\n", tParam->threadId, comparacao);
+        //printf("%d - Resultado : %d\n", tParam->threadId, comparacao);
         if (comparacao > 0) {
-            addFim(tParam->maiores, atual->dado);
+            addFim(*tParam->maiores, atual->dado);
         } else {
-            addFim(tParam->menores, atual->dado);
+            addFim(*tParam->menores, atual->dado);
         }
         atual = atual->proximo;
     }
+    printf("%d - Maiores -> ", tParam->threadId);
+    toString(*tParam->maiores);
+    printf("%d - Menores -> ", tParam->threadId);
+    toString(*tParam->menores);
+    return NULL;
+}
+
+void *ordenarSozinho(void *arg) {
     return NULL;
 }
 
@@ -37,8 +42,9 @@ void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, voi
     pthread_t *threads;
     param_t *args;
 
-    pLista *maiores;
-    pLista *menores;
+    pLista *maiores, *menores, maioresJuntos, menoresJuntos, ordenadaMenores, ordenadaMaiores;
+    
+    
 
     threads = (pthread_t *) malloc(qtThreads * sizeof (pthread_t));
     args = (param_t *) malloc(qtThreads * sizeof (param_t));
@@ -52,8 +58,8 @@ void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, voi
         args[i].dataSize = p->tInfo;
         args[i].pivo = p->inicio;
         args[i].lista = p;
-        args[i].maiores = maiores[i];
-        args[i].menores = menores[i];
+        args[i].maiores = &maiores[i];
+        args[i].menores = &menores[i];
         if (i == 0) {
             args[i].inicio = 2;
             args[i].deslocamento = qtIni;
@@ -67,13 +73,34 @@ void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, voi
     for (i = 0; i < qtThreads; i++) {
         pthread_join(threads[i], NULL);
     }
+    
+    maioresJuntos = maiores[0];
+    menoresJuntos = menores[0];
+    
+    for (i = 1; i < qtThreads; i++) {
+        acrescentarFim(maioresJuntos, maiores[i]);
+        acrescentarFim(menoresJuntos, menores[i]);
+    }
     free(threads);
     free(args);
-    for (i = 1; i < qtThreads; i++) {
-        acrescentarFim(maiores[0], maiores[i]);
-        acrescentarFim(menores[0], menores[i]);
+    free(maiores);
+    free(menores);
+    
+    printf("Maiores Juntos -> ");
+    toString(maioresJuntos);
+    printf("Menores Juntos -> ");
+    toString(menoresJuntos);
+    toString(p);
+    printf("Comparando tamanho %d > %d\n", menoresJuntos->size, (qtThreads * THREAD_ORDENA));
+    if (menoresJuntos->size > (qtThreads * THREAD_ORDENA)){
+        ordenar(menoresJuntos, &ordenadaMenores, qtThreads, cmp);
+    } else {
+        
     }
-
-    toString(maiores[0]);
-    toString(menores[0]);
+    /*
+    criarLista(ordenada, p->tInfo);
+    addInicio((* ordenada), p->inicio->dado);
+    acrescentarInicio(ordenada, ordenadaMenores);
+    acrescentarFim(ordenada, ordenadaMaiores);
+    */
 }
