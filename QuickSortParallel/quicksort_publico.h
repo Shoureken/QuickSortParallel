@@ -14,8 +14,9 @@
 #define TRUE 1
 #define FALSE 0
 
-#define THREAD_ORDENA 3
+#define THREAD_ORDENA 2
 
-typedef struct param_t *pParam_t, **ppParam_t;
+typedef struct PaThreadSeparar *pPaThreadSeparar, **ppPaThreadSeparar;
+typedef struct PaThreadSozinho *pPaThreadSozinho, **ppPaThreadSozinho;
 
 void ordenar(pLista p, ppLista ordenada, int qtThreads, int (*cmp)(void *d1, void *d2));

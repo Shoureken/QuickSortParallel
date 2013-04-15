@@ -22,4 +22,14 @@ typedef struct {
     int (*cmp)(void *d1, void *d2);
     int inicio;
     int deslocamento;
-} param_t;
+} PaThreadSeparar;
+
+typedef struct {
+    int threadId;
+    int dataSize;
+    pLista lista;
+    Nolista *pivo;
+    int (*cmp)(void *d1, void *d2);
+    int inicio;
+    int deslocamento;
+} PaThreadSozinho;
