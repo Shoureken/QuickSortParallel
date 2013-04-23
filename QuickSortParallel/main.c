@@ -36,16 +36,17 @@ int cmpInt(void *d1, void *d2) {
     } else if (*(p1) < *(p2)) {
         result = -1;
     }
+//    printf("%d e %d\n",*(p1), *(p2));
     return result;
 }
 
 int main(int argc, char** argv) {
     //int a = 1, b = 2;
     pLista lista = NULL, ordenada = NULL;
-    int size;
+    int size, qtThread;
 
-    if ((argc != 2)) {
-        printf("Uso: %s <tamanho do array>\n", argv[0]);
+    if ((argc != 3)) {
+        printf("Uso: %s <tamanho do array> <threads>\n", argv[0]);
         exit(EXIT_FAILURE);
     }
 
@@ -54,8 +55,11 @@ int main(int argc, char** argv) {
 
     size = atoi(argv[1]); // tamanho do array
     criarListaRandom(&lista, size);
-    toString(lista);
-    ordenar(lista, &ordenada, 2, cmpInt);
+    
+    //toString(lista);
+    qtThread = atoi(argv[2]);
+    ordenar(lista, &ordenada, qtThread, cmpInt);
+    //toString(ordenada);
 
     return 0;
 }

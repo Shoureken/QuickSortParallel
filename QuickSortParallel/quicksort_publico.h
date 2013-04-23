@@ -14,7 +14,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#define THREAD_ORDENA 2
+#define THREAD_ORDENA 200000
 
 typedef struct PaThreadSeparar *pPaThreadSeparar, **ppPaThreadSeparar;
 typedef struct PaThreadSozinho *pPaThreadSozinho, **ppPaThreadSozinho;

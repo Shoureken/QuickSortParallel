@@ -130,14 +130,11 @@ help: .help-post
 ldde.o:	ldde.c  ldde_publico.h  ldde_privado.h
 	$(CC) $(CCFLAGS) -c ldde.c -o ldde.o
 	
-me.o:	me.c  me_privado.h  me_publico.h
-	$(CC) $(CCFLAGS) -c me.c -o me.o
-	
 quicksort.o:	quicksort.c  quicksort_privado.h  quicksort_publico.h
 	$(CC) $(CCFLAGS) -c quicksort.c -o quicksort.o	
 
-main:	main.c  main.h  quicksort.o me.o  ldde.o
-	$(CC) $(CCFLAGS) main.c me.o ldde.o quicksort.o -o main
+main:	main.c  main.h  quicksort.o ldde.o
+	$(CC) $(CCFLAGS) main.c ldde.o quicksort.o -o main
 
 # include project implementation makefile
 include nbproject/Makefile-impl.mk

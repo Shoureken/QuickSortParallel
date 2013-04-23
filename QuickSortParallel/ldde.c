@@ -9,7 +9,7 @@ int criarLista(ppLista pp, int tInfo) {
     (*pp) = (Lista *) malloc(sizeof (Lista));
     if ((*pp) == NULL) {
         return FALSE;
-    }        
+    }
     (*pp)->tInfo = tInfo;
     (*pp)->inicio = NULL;
     (*pp)->fim = NULL;
@@ -339,7 +339,7 @@ int buscaFim(pLista p, void *elemento) {
     return TRUE;
 }
 
-int tamanho(pLista p){
+int tamanho(pLista p) {
     if (p == NULL) {
         //printf("[Lista] - Lista é NULL!\n");
         return FALSE;
@@ -347,54 +347,84 @@ int tamanho(pLista p){
     return p->size;
 }
 
-void toString(pLista p){
+void toString(pLista p) {
     Nolista *aux;
     int dest = 0;
     aux = p->inicio;
     printf("Lista - %d --->   ", p->size);
-    while(aux!=NULL){
-        memcpy(&dest,aux->dado,p->tInfo);
-        printf("%i,",dest);
+    while (aux != NULL) {
+        memcpy(&dest, aux->dado, p->tInfo);
+        printf("%i,", dest);
         aux = aux->proximo;
     }
     printf("\n");
 }
 
-int acrescentarFim(pLista original, pLista acrescentar){
-    if (vazia(original)){
+int acrescentarFim(pLista original, pLista acrescentar) {
+
+    //printf("AcrescentarFim\n");
+    //toString(original);
+    //toString(acrescentar);
+
+    //printf("%d + %d = ", original->size, acrescentar->size);
+
+
+    if (vazia(original)) {
+        if (vazia(acrescentar)) {
+            //printf("Ambas Vazias\n");
+            return TRUE;
+        }
         original->inicio = acrescentar->inicio;
         original->fim = acrescentar->fim;
         original->size = acrescentar->size;
+        //printf("%d\n", original->size);
+        //printf("Aqui\n");
         return TRUE;
     }
-    if (vazia(acrescentar)){
+    if (vazia(acrescentar)) {
         return TRUE;
     }
     original->fim->proximo = acrescentar->inicio;
     acrescentar->inicio->anterior = original->fim;
     original->fim = acrescentar->fim;
+
+
     original->size += acrescentar->size;
+    //printf("%d\n", original->size);
+    //printf("\n");
     return TRUE;
 }
 
-int acrescentarInicio(pLista original, pLista acrescentar){
-    if (vazia(original)){
+int acrescentarInicio(pLista original, pLista acrescentar) {
+    //printf("AcrescentarInicio\n");
+    //toString(original);
+    //toString(acrescentar);
+
+    if (vazia(original)) {
+        if (vazia(acrescentar)) {
+            //printf("Ambas Vazias\n");
+            return TRUE;
+        }
         original->inicio = acrescentar->inicio;
         original->fim = acrescentar->fim;
         original->size = acrescentar->size;
         return TRUE;
     }
-    if (vazia(acrescentar)){
+    if (vazia(acrescentar)) {
         return TRUE;
     }
     original->inicio->anterior = acrescentar->fim;
     acrescentar->fim->proximo = original->inicio;
     original->inicio = acrescentar->inicio;
     original->size += acrescentar->size;
+    
+    
+    //printf("%d\n", original->size);
+    //printf("\n");
     return TRUE;
 }
 
-int buscaNoPos(pLista p, ppNoLista pp, int pos){
+int buscaNoPos(pLista p, ppNoLista pp, int pos) {
     Nolista *aux;
     int count = 1;
     if (pos < 1) {
@@ -422,4 +452,10 @@ int buscaNoPos(pLista p, ppNoLista pp, int pos){
     (*pp) = aux;
     //printf("[BUSCAR] - Posição %d - Ok!\n", pos);
     return TRUE;
+}
+
+void swap(ppNoLista a, ppNoLista b) {
+    void *aux = (*a)->dado;
+    (*a)->dado = (*b)->dado;
+    (*b)->dado = aux;
 }
