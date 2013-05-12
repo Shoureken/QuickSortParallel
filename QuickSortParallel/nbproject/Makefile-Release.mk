@@ -37,7 +37,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/ldde.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/me.o \
 	${OBJECTDIR}/quicksort.o
 
 
@@ -74,11 +73,6 @@ ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
-
-${OBJECTDIR}/me.o: me.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/me.o me.c
 
 ${OBJECTDIR}/quicksort.o: quicksort.c 
 	${MKDIR} -p ${OBJECTDIR}

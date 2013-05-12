@@ -7,8 +7,6 @@
       <itemPath>ldde_privado.h</itemPath>
       <itemPath>ldde_publico.h</itemPath>
       <itemPath>main.h</itemPath>
-      <itemPath>me_privado.h</itemPath>
-      <itemPath>me_publico.h</itemPath>
       <itemPath>quicksort_privado.h</itemPath>
       <itemPath>quicksort_publico.h</itemPath>
     </logicalFolder>
@@ -17,7 +15,6 @@
                    projectFiles="true">
       <itemPath>ldde.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>me.c</itemPath>
       <itemPath>quicksort.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -57,12 +54,6 @@
       </item>
       <item path="main.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="me.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="me_privado.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="me_publico.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="quicksort.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="quicksort_privado.h" ex="false" tool="3" flavor2="0">
@@ -100,12 +91,6 @@
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="main.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="me.c" ex="false" tool="0" flavor2="0">
-      </item>
-      <item path="me_privado.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="me_publico.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="quicksort.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -14,5 +14,6 @@ typedef struct Lista {
     struct Nolista *fim;
     int tInfo;
     int size;
+    int blockSize;
 } Lista;
 
