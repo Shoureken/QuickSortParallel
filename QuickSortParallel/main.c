@@ -10,9 +10,9 @@
 
 int criarListaRandom(ppLista p, int size) {
     int i;
-    criarLista(p, sizeof (int));
+    criarLista(p, sizeof (int), size);
     for (i = 0; i < size; i++) {
-        int value = rand();
+        int value = rand()%30;
         addFim((*p), &value);
     }
     return TRUE;
@@ -20,7 +20,7 @@ int criarListaRandom(ppLista p, int size) {
 
 int criarListaOrd(ppLista p, int size) {
     int i;
-    criarLista(p, sizeof (int));
+    criarLista(p, sizeof (int), size);
     for (i = 0; i < size; i++) {
         addFim((*p), &i);
     }
@@ -36,13 +36,14 @@ int cmpInt(void *d1, void *d2) {
     } else if (*(p1) < *(p2)) {
         result = -1;
     }
-//    printf("%d e %d\n",*(p1), *(p2));
+    //printf("Comparando %d e %d, result = %d\n",*(p1), *(p2), result);
     return result;
 }
 
 int main(int argc, char** argv) {
     //int a = 1, b = 2;
-    pLista lista = NULL, ordenada = NULL;
+    pLista lista = NULL/*, lista2 = NULL, lista3 = NULL*/, ordenada = NULL;
+    //pNoLista no;
     int size, qtThread;
 
     if ((argc != 3)) {
@@ -52,7 +53,8 @@ int main(int argc, char** argv) {
 
     //printf("Resultado2 : %d\n", cmpInt(&a, &b));
     //printf("Resultado3 : %d\n", cmpInt(&b, &a));
-
+    
+    
     size = atoi(argv[1]); // tamanho do array
     criarListaRandom(&lista, size);
     
@@ -60,7 +62,56 @@ int main(int argc, char** argv) {
     qtThread = atoi(argv[2]);
     ordenar(lista, &ordenada, qtThread, cmpInt);
     //toString(ordenada);
-
+    
+    
+    /*
+    criarLista(&lista, sizeof(int), 3);
+    criarLista(&lista2, sizeof(int), 3);
+    addFim(lista, &a);
+    printf("Main -> ");
+    toString(lista);
+    a = 2;
+    addFim(lista, &a);
+    printf("Main -> ");
+    toString(lista);
+    a = 3;
+    addFim(lista, &a);
+    printf("Main -> ");
+    toString(lista);
+    a = 4;
+    addFim(lista, &a);
+    printf("Main -> ");
+    toString(lista);
+    a = 5;
+    addFim(lista2, &a);
+    printf("Main -> ");
+    toString(lista2);
+    a = 6;
+    addFim(lista2, &a);
+    printf("Main -> ");
+    toString(lista2);
+    a = 7;
+    addFim(lista2, &a);
+    printf("Main -> ");
+    toString(lista2);
+    
+    
+    buscaNoPos(lista, &no, 0);
+    buscaNoPos(lista, &no, 1);
+    buscaNoPos(lista, &no, 2);
+    buscaNoPos(lista, &no, 3);
+    buscaNoPos(lista, &no, 4);
+    buscaNoPos(lista, &no, 5);
+    buscaNoPos(lista, &no, 6);
+    buscaNoPos(lista, &no, 7);
+    buscaNoPos(lista, &no, 8);
+    
+    acrescentarFim(lista, lista2, &lista3);
+    
+    toString(lista3);
+    
+    destruirLista(&lista);
+    */
     return 0;
 }
 

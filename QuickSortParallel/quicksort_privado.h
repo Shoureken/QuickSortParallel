@@ -16,7 +16,7 @@ typedef struct {
     int threadId;
     int dataSize;
     pLista lista;
-    Nolista *pivo;
+    void* pivo;
     ppLista maiores;
     ppLista menores;
     int (*cmp)(void *d1, void *d2);
@@ -28,7 +28,7 @@ typedef struct {
     int threadId;
     int dataSize;
     pLista lista;
-    Nolista *pivo;
+    void* pivo;
     int (*cmp)(void *d1, void *d2);
     int inicio;
     int deslocamento;

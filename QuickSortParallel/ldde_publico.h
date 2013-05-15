@@ -9,26 +9,19 @@
 typedef struct Lista *pLista, **ppLista;
 typedef struct Nolista *pNoLista, **ppNoLista;
 
-int criarLista(ppLista pp, int tInfo);
+int criarLista(ppLista pp, int tInfo, int blockSize);
 int destruirLista(ppLista pp);
 int reiniciarLista(ppLista pp);
 
-int addInicio(pLista p, void *elemento);
-int addPos(pLista p, void *elemento, int pos);
 int addFim(pLista p, void *elemento);
 
-int remInicio(pLista p, void *elemento);
-int remPos(pLista p, void *elemento, int pos);
-int remFim(pLista p, void *elemento);
-
 int buscaInicio(pLista p, void *elemento);
-int buscaPos(pLista p, void *elemento, int pos);
-int buscaFim(pLista p, void *elemento);
 
 int tamanho(pLista p);
 void toString(pLista p);
-int acrescentarFim(pLista original, pLista acrescentar);
+int acrescentarFim(pLista original, pLista acrescentar, ppLista result);
 int acrescentarInicio(pLista original, pLista acrescentar);
 int buscaNoPos(pLista p, ppNoLista pp, int pos);
 
-void swap(ppNoLista a, ppNoLista b);
+//void swap(ppNoLista a, ppNoLista b);
+void swap(pNoLista no, int posa, int posb, int tInfo);

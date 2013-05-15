@@ -7,6 +7,7 @@ typedef struct Nolista {
     void *dado;
     struct Nolista *proximo;
     struct Nolista *anterior;
+    int used;
 } Nolista;
 
 typedef struct Lista {
